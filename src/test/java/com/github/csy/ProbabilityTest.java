@@ -1,9 +1,8 @@
 package com.github.csy;
 
-import org.junit.Assert;
 import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import static org.junit.Assert.*;
 
 public class ProbabilityTest {
 
@@ -15,7 +14,9 @@ public class ProbabilityTest {
         //when
 
         //then
-        Assert.assertEquals( 0.4, beforeAndValue.andMethod(afterAndValue).getValue(), 0.00001);
+        // assertThat(5.1).isEqualTo(5, withPrecision(1d));
+        assertThat(beforeAndValue.andMethod(afterAndValue)).isEqualToComparingFieldByField(new Probability((float) 0.4));
+
     }
 
     @Test
@@ -24,7 +25,7 @@ public class ProbabilityTest {
         Probability notValue = new Probability((float) 0.3);
         //when
         //then
-        Assert.assertEquals(0.7, notValue.notMethod().getValue(), 0.00001);
+        assertThat(notValue.notMethod()).isEqualToComparingFieldByField(new Probability((float) 0.7));
 
     }
 
@@ -35,7 +36,7 @@ public class ProbabilityTest {
         Probability afterOrValue = new Probability((float) 0.6);
         //when
         //then
-        Assert.assertEquals(0.72, beforeOrValue.orMethod(afterOrValue).getValue(), 0.00001);
+        assertThat(beforeOrValue.orMethod(afterOrValue)).isEqualToComparingFieldByField(new Probability((float) 0.72));
 
     }
 
